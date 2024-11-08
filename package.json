@@ -1,0 +1,76 @@
+{
+  "name": "vscode-extension-template",
+  "displayName": "VS Code Extension Template",
+  "description": "Helping users who want to get Y done, by provding X.",
+  "version": "0.0.1",
+  "publisher": "betterthantomorrow",
+  "author": {
+    "name": "Me Myself and I",
+    "email": "me@myself.i.com"
+  },
+  "icon": "assets/my-extension-icon-128x128.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PEZ/vscode-extension-template.git"
+  },
+  "engines": {
+    "vscode": ">=1.75.0",
+    "node": ">=20.18.0"
+  },
+  "categories": [
+  ],
+  "keywords": [
+  ],
+  "enabledApiProposals": ["extensionRuntime"],
+  "activationEvents": [],
+  "main": "out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vscode-extension-template.hello",
+        "category": "VS Code Extension Template",
+        "title": "Say Hello!"      },
+      {
+        "command": "vscode-extension-template.newHelloDocument",
+        "category": "VS Code Extension Template",
+        "enablement": ":vscode-extension-template/active?",
+        "title": "Open a new Hello document"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "vscode-extension-template.hello",
+        "key": "ctrl+alt+h h"
+      },
+      {
+        "command": "vscode-extension-template.newHelloDocument",
+        "when": ":vscode-extension-template/active?",
+        "key": "ctrl+alt+h d"
+      }
+    ]
+  },
+  "scripts": {
+    "clean": "rimraf .cpcache .shadow-cljs/ out/",
+    "preclean": "npm install",
+    "watch": "npx shadow-cljs -d cider/cider-nrepl:0.50.2 watch :extension :test-watch",
+    "test": "node out/extension-tests.js",
+    "pretest": "npm run compile",
+    "prewatch": "npm run clean",
+    "compile": "npx shadow-cljs compile :extension :test-compile",
+    "precompile": "npm run clean",
+    "release-test": "node out/extension-tests.js",
+    "release": "npx shadow-cljs release :extension :test-compile",
+    "package": "npx vsce package --githubBranch master",
+    "vscode:prepublish": "npm run clean && npm run release"
+  },
+  "dependencies": {
+    "@vscode/codicons": "^0.0.36"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "shadow-cljs": "^2.28.19",
+    "@vscode/vsce": "^3.2.1",
+    "@vscode/test-electron": "^2.4.1",
+    "ovsx": "^0.10.0"
+  }
+}

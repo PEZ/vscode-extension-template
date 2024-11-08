@@ -1,0 +1,23 @@
+{:deps true
+ :builds
+ {:extension {:target :node-library
+              :js-options {:js-provider :shadow
+                           :keep-native-requires true
+                           :keep-as-require #{"vscode"}}
+              :compiler-options {:infer-externs :auto}
+              :output-dir "out/js"
+              :output-to "out/extension.js"
+              :exports {:activate vscode-extension-template.extension/activate
+                        ;:deactivate vscode-extension-template.extension/deactivate
+                        }
+              :devtools {:build-notify vscode-extension-template.extension/build-notify!}}
+  :test-watch
+  {:target    :node-test
+   :output-to "out/extension-tests.js"
+   :ns-regexp "-test$"
+   :autorun   true}
+
+  :test-compile
+  {:target    :node-test
+   :output-to "out/extension-tests.js"
+   :ns-regexp "-test$"}}}
