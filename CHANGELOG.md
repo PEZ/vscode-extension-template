@@ -1,6 +1,6 @@
 # Change Log
 
-Changes to VS Code Extension Template
+Changes to Extension Template
 
 ## [Unreleased]
 

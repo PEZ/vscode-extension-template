@@ -31,7 +31,7 @@
 ;;;;; Extension activation entry point
 
 (defn ^:export activate [context]
-  (println "VS Code Extension Template activate START")
+  (println "Extension Template activate START")
   (when context
     (swap! db/!app-db assoc
            :extension/context context
@@ -41,12 +41,12 @@
          (register-command! db/!app-db context "vscode-extension-template.newHelloDocument" #'commands/new-untitled-hello-document!+)
          (when-contexts/set-context!+ db/!app-db :vscode-extension-template/active? true))
        (catch :default e
-         (vscode/window.showErrorMessage (str "VS Code Extension Template activation failed: "
+         (vscode/window.showErrorMessage (str "Extension Template activation failed: "
                                               (.-message e)
                                               ", see Development Console for stack trace"))
          (throw e))
        (finally
-        (println "VS Code Extension Template activate END")))
+        (println "Extension Template activate END")))
   extension-api)
 
 ;;;;; Extension deactivation entry point

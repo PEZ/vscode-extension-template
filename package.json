@@ -1,6 +1,6 @@
 {
   "name": "vscode-extension-template",
-  "displayName": "VS Code Extension Template",
+  "displayName": "Extension Template",
   "description": "Helping users who want to get Y done, by provding X.",
   "version": "0.0.1",
   "publisher": "betterthantomorrow",
@@ -28,11 +28,11 @@
     "commands": [
       {
         "command": "vscode-extension-template.hello",
-        "category": "VS Code Extension Template",
+        "category": "Extension Template",
         "title": "Say Hello!"      },
       {
         "command": "vscode-extension-template.newHelloDocument",
-        "category": "VS Code Extension Template",
+        "category": "Extension Template",
         "enablement": ":vscode-extension-template/active?",
         "title": "Open a new Hello document"
       }
