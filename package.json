@@ -8,7 +8,7 @@
     "name": "Me Myself and I",
     "email": "me@myself.i.com"
   },
-  "icon": "assets/my-extension-icon-128x128.png",
+  "icon": "assets/extension-icon-128x128.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/PEZ/vsc-et.git"
@@ -17,11 +17,8 @@
     "vscode": ">=1.75.0",
     "node": ">=20.18.0"
   },
-  "categories": [
-  ],
-  "keywords": [
-  ],
-  "enabledApiProposals": ["extensionRuntime"],
+  "categories": [],
+  "keywords": [],
   "activationEvents": [],
   "main": "out/extension.js",
   "contributes": {
@@ -29,7 +26,8 @@
       {
         "command": "vsc-et.hello",
         "category": "Extension Template",
-        "title": "Say Hello!"      },
+        "title": "Say Hello!"
+      },
       {
         "command": "vsc-et.newHelloDocument",
         "category": "Extension Template",
