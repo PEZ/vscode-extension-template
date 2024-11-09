@@ -21,7 +21,7 @@
                                               ", see Development Console for stack trace"))
          (throw e))
        (finally
-        (println "Extension Template activate END")))
+         (println "Extension Template activate END")))
   api/extension-api)
 
 ;;;;; Extension deactivation entry point
