@@ -1,6 +1,8 @@
-# Extension Template
+# A VS Code Extension Template
 
+This extension does nothing interesting. It is a template for creating VS Code extensions.
 
+Details and usage instructions TBD...
 
 ## License
 
