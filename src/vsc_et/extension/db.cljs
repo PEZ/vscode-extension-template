@@ -1,4 +1,4 @@
-(ns vsc-et.db)
+(ns vsc-et.extension.db)
 
 (def init-db {:extension/context nil
               :extension/disposables []

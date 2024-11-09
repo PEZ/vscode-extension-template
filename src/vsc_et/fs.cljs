@@ -1,6 +1,6 @@
 (ns vsc-et.fs
   (:require ["vscode" :as vscode]
-            [vsc-et.db :as db]
+            [vsc-et.extension.db :as db]
             [promesa.core :as p]))
 
 (defn- ws-uri [path-or-uri]

@@ -7,8 +7,8 @@
 ;; This extension template does not have any business logic, but the db
 ;; namespace at least does not require "vscode".
 
-(ns vsc-et.db-test
-  (:require [vsc-et.db :as sut]
+(ns vsc-et.extension.db-test
+  (:require [vsc-et.extension.db :as sut]
             [clojure.test :refer [deftest is testing]]))
 
 (deftest init-db
