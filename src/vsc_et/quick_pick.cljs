@@ -1,6 +1,6 @@
-(ns vscode-extension-template.quick-pick
+(ns vsc-et.quick-pick
   (:require ["vscode" :as vscode]
-            [vscode-extension-template.db :as db]
+            [vsc-et.db :as db]
             [promesa.core :as p]))
 
 (defn memoized-quick-pick!

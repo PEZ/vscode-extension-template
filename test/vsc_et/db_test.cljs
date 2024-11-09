@@ -7,11 +7,11 @@
 ;; This extension template does not have any business logic, but the db
 ;; namespace at least does not require "vscode".
 
-(ns vscode-extension-template.db-test
-  (:require [vscode-extension-template.db :as sut]
+(ns vsc-et.db-test
+  (:require [vsc-et.db :as sut]
             [clojure.test :refer [deftest is testing]]))
 
 (deftest init-db
   (testing "init-db"
-    (is (= {:vscode-extension-template/active? false}
+    (is (= {:vsc-et/active? false}
            (:extension/when-contexts sut/init-db)))))

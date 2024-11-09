@@ -1,4 +1,4 @@
-(ns vscode-extension-template.commands
+(ns vsc-et.commands
   (:require ["vscode" :as vscode]
             [promesa.core :as p]))
 

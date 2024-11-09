@@ -1,9 +1,9 @@
-(ns vscode-extension-template.db)
+(ns vsc-et.db)
 
 (def init-db {:extension/context nil
               :extension/disposables []
               :workspace/root-path nil
-              :extension/when-contexts {:vscode-extension-template/active? false}})
+              :extension/when-contexts {:vsc-et/active? false}})
 
 (defonce !app-db (atom init-db))
 

@@ -68,7 +68,7 @@
   (tag version dry-run?)
   (push dry-run?)
   (println "Open to follow the progress of the release:")
-  (println "  https://github.com/PEZ/vscode-extension-template/actions"))
+  (println "  https://github.com/PEZ/vsc-et/actions"))
 
 (defn publish! [unreleased-changelog-text dry-run?]
   (let [changelog-text (slurp changelog-filename)

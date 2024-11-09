@@ -1,6 +1,6 @@
-(ns vscode-extension-template.fs
+(ns vsc-et.fs
   (:require ["vscode" :as vscode]
-            [vscode-extension-template.db :as db]
+            [vsc-et.db :as db]
             [promesa.core :as p]))
 
 (defn- ws-uri [path-or-uri]

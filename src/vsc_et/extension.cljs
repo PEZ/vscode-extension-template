@@ -1,8 +1,8 @@
-(ns vscode-extension-template.extension
+(ns vsc-et.extension
   (:require ["vscode" :as vscode]
-            [vscode-extension-template.commands :as commands]
-            [vscode-extension-template.db :as db]
-            [vscode-extension-template.when-contexts :as when-contexts]))
+            [vsc-et.commands :as commands]
+            [vsc-et.db :as db]
+            [vsc-et.when-contexts :as when-contexts]))
 
 ;;;;; Extension lifecycle helper functions
 ;; These also assist with managing `vscode/Disposable`s in a hot-reloadable way.
@@ -20,7 +20,7 @@
   (push-disposable! !state context (vscode/commands.registerCommand command-id var)))
 
 (defn- cleanup! []
-  (when-contexts/set-context!+ db/!app-db :vscode-extension-template/active? false)
+  (when-contexts/set-context!+ db/!app-db :vsc-et/active? false)
   (clear-disposables! db/!app-db))
 
 ;;;;; Extension API
@@ -37,9 +37,9 @@
            :extension/context context
            :workspace/root-path (some-> vscode/workspace.workspaceFolders first)))
   (try (let [{:keys [extension/context]} @db/!app-db]
-         (register-command! db/!app-db context "vscode-extension-template.hello" #'commands/hello!+)
-         (register-command! db/!app-db context "vscode-extension-template.newHelloDocument" #'commands/new-untitled-hello-document!+)
-         (when-contexts/set-context!+ db/!app-db :vscode-extension-template/active? true))
+         (register-command! db/!app-db context "vsc-et.hello" #'commands/hello!+)
+         (register-command! db/!app-db context "vsc-et.newHelloDocument" #'commands/new-untitled-hello-document!+)
+         (when-contexts/set-context!+ db/!app-db :vsc-et/active? true))
        (catch :default e
          (vscode/window.showErrorMessage (str "Extension Template activation failed: "
                                               (.-message e)
@@ -71,7 +71,7 @@
   [build-info]
   (when (= :build-complete (:type build-info))
     (when-let [compiled (-> build-info :info :compiled)]
-      (when (compiled [:shadow.build.classpath/resource "vscode_extension_template/extension.cljs"])
-        (println "hot-reload: vscode_extension_template/extension.cljs reloaded, reactivating the extension...")
+      (when (compiled [:shadow.build.classpath/resource "vsc_et/extension.cljs"])
+        (println "hot-reload: vsc_et/extension.cljs reloaded, reactivating the extension...")
         (cleanup!)
         (activate nil)))))

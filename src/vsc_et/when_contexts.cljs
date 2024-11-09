@@ -1,4 +1,4 @@
-(ns vscode-extension-template.when-contexts
+(ns vsc-et.when-contexts
   (:require ["vscode" :as vscode]))
 
 (defn set-context!+ [!state k v]
@@ -9,5 +9,5 @@
   (get-in state [:extension/when-contexts k]))
 
 (comment
-  (require '[vscode-extension-template.db :as db])
-  (get-context db/!app-db :vscode-extension-template/isActive))
+  (require '[vsc-et.db :as db])
+  (get-context db/!app-db :vsc-et/isActive))

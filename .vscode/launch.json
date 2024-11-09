@@ -13,7 +13,7 @@
 			"args": [
 				"--extensionDevelopmentPath=${workspaceRoot}",
 				"--enable-proposed-api",
-				"betterthantomorrow.vscode-extension-template"
+				"betterthantomorrow.vsc-et"
 			],
 			"sourceMaps": true,
 			"outFiles": [
