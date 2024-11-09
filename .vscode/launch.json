@@ -13,7 +13,7 @@
 			"args": [
 				"--extensionDevelopmentPath=${workspaceRoot}",
 				"--enable-proposed-api",
-				"betterthantomorrow.vsc-et"
+				"betterthantomorrow.vsc-et",
 			],
 			"sourceMaps": true,
 			"outFiles": [
@@ -27,7 +27,9 @@
 			"runtimeExecutable": "${execPath}",
 			"args": [
 				"--extensionDevelopmentPath=${workspaceRoot}",
-				"--folder-uri=null"
+				"--folder-uri=null",
+				"--enable-proposed-api",
+				"betterthantomorrow.vsc-et",
 			],
 			"sourceMaps": true,
 			"outFiles": [
@@ -41,7 +43,9 @@
 			"runtimeExecutable": "${execPath}",
 			"args": [
 				"--extensionDevelopmentPath=${workspaceRoot}",
-				"--disable-extensions"
+				"--disable-extensions",
+				"--enable-proposed-api",
+				"betterthantomorrow.vsc-et",
 			],
 			"sourceMaps": true,
 			"env": {},
