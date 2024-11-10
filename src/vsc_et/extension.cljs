@@ -1,30 +1,50 @@
 (ns vsc-et.extension
-  (:require [vsc-et.extension.db :as db]
-            [vsc-et.extension.life-cycle :as lc]
+  (:require ["vscode" :as vscode]
+            [vsc-et.hellos :as hellos]
+            [vsc-et.extension.db :as db]
             [vsc-et.extension.life-cycle-helpers :as lc-helpers]
-            [vsc-et.shadow-reload-helpers :as reload-helpers]))
+            [vsc-et.extension.when-contexts :as when-contexts]))
 
 ;;;;; Extension activation entry point
 
 (defn ^:export activate [context]
-  (lc/activate! db/!app-db context))
+  (println "Extension Template activate START")
+  (when context
+    (swap! db/!app-db assoc
+           :extension/context context))
+  (try (let [{:keys [extension/context]} @db/!app-db]
+         (lc-helpers/register-command! db/!app-db context "vsc-et.hello" #'hellos/hello-command!+)
+         (lc-helpers/register-command! db/!app-db context "vsc-et.newHelloDocument" #'hellos/new-hello-doc-command!+)
+         (when-contexts/set-context!+ db/!app-db :vsc-et/active? true))
+       (catch :default e
+         (vscode/window.showErrorMessage (str "Extension Template activation failed: "
+                                              (.-message e)
+                                              ", see Development Console for stack trace"))
+         (throw e))
+       (finally
+         (println "Extension Template activate END")))
+  #js {:v1 {}})
+
+(comment
+  ;; When you have updated the activate function, cleanup and call activate again
+  ;; NB: If you have updated the extension manifest, you will need to restart the extension host instead
+  (lc-helpers/cleanup! db/!app-db)
+  (activate nil)
+  :rcf)
+
+;;;;; Extension deactivation entry point
 
 (defn ^:export deactivate []
-  (lc/deactivate! db/!app-db))
+  (lc-helpers/cleanup! db/!app-db))
+
+
+;;;;; shadow-cljs hot reload hooks
+;; We don't need to do anything here, but it is nice to see that reloading is happening
+
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
+(defn ^{:dev/before-load true} before-load []
+  (println "shadow-cljs reloading..."))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn ^{:dev/after-load true} after-load []
-  (println "shadow-cljs has compiled any changed files and reloaded their namespaces"))
-
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var
-                      :inline-def]}
-(defn build-notify!
-  [build-info]
-  (when (= :build-complete (:type build-info))
-    (def build-info build-info)
-    (when-let [compiled (-> build-info :info :compiled)]
-      (def compiled compiled)
-      (when (reload-helpers/call-activate? compiled)
-        (println "shadow-cljs hot-reload: vsc_et/extension/life_cycle.cljs changed, reactivating the extension...")
-        (lc-helpers/cleanup! db/!app-db)
-        (lc/activate! db/!app-db nil)))))
+  (println "shadow-cljs reload complete"))
