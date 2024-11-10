@@ -4,7 +4,7 @@
             [promesa.core :as p]
             [e2e.macros :refer [deftest-async]]))
 
-(deftest hello
+(deftest foo
   (testing "We can test things sync things"
     (is (= :foo :foo))
     (is (= 1 (count vscode/workspace.workspaceFolders)))))
