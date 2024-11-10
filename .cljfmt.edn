@@ -1,3 +1,5 @@
-; Needed to guarantee that we use cljfmt defaults
-; (Without this file cljfmt may find a config file in a parent directory.)
-{}
+{:remove-surrounding-whitespace? true
+ :remove-trailing-whitespace? true
+ :remove-consecutive-blank-lines? false
+ :insert-missing-whitespace? true
+ :remove-multiple-non-indenting-spaces? false}
