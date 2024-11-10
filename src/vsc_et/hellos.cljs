@@ -1,3 +1,5 @@
+;; Hello World example commands
+
 (ns vsc-et.hellos
   (:require ["vscode" :as vscode]
             [promesa.core :as p]
