@@ -48,6 +48,7 @@
                         (< pass passed-minimum-threshold) (str "FAILURE: Less than " passed-minimum-threshold " assertions passed")
                         :else nil)]
       (println "Runner: tests run, results:" (select-keys  @db/!state [:pass :fail :error]))
+      (swap! db/!state merge db/default-db)
       (if fail-reason
         (p/reject! running fail-reason)
         (p/resolve! running true)))))
