@@ -47,8 +47,7 @@
                         (< 0 (+ fail error)) "FAILURE: Some tests failed or errored"
                         (< pass passed-minimum-threshold) (str "FAILURE: Less than " passed-minimum-threshold " assertions passed")
                         :else nil)]
-      (println "Runner: tests run, results:" (select-keys  @db/!state [:pass :fail :error]))
-      (swap! db/!state merge db/default-db)
+
       (if fail-reason
         (p/reject! running fail-reason)
         (p/resolve! running true)))))
@@ -75,9 +74,9 @@
           (println "Running tests in" nss-syms)
           (apply require nss-syms)
           (apply cljs.test/run-tests nss-syms)
-          (workspace-activate/clean-up!))
+          (:running @db/!state))
         (p/catch (fn [e]
-                   (workspace-activate/clean-up!)
+                   (workspace-activate/clean-up!+)
                    (p/reject! (:running @db/!state) e))))
     (do
       (println "Runner: Workspace not activated yet, tries: " tries "- trying again in a jiffy")
@@ -87,7 +86,11 @@
 (defn run-all-tests [src-path]
   (let [running (p/deferred)]
     (swap! db/!state assoc :running running)
-    (p/let [nss-syms (find-test-nss+ src-path)]
-      (run-when-ws-activated nss-syms 1))
+    (p/let [nss-syms (find-test-nss+ src-path)
+            p (run-when-ws-activated nss-syms 1)]
+      (workspace-activate/clean-up!+)
+      (println "Runner: tests run, results:" (select-keys  @db/!state [:pass :fail :error]))
+      (swap! db/!state merge db/default-db)
+      p)
     running))
 
