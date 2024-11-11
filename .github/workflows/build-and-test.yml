@@ -116,16 +116,14 @@ jobs:
       - name: Download VSIX Artifact
         uses: actions/download-artifact@v4
         with:
-          path: /tmp
+          path: .
           pattern: '${{ runner.os }}-*.vsix'
           merge-multiple: true
 
       - name: Get VSIX File Name
         id: get-vsix-name
         shell: bash
-        run: |
-          VSIX_NAME=$(ls /tmp/*.vsix)
-          echo "VSIX_NAME=$VSIX_NAME" >> $GITHUB_ENV
+        run: echo "VSIX_NAME=$(ls *.vsix)" >> $GITHUB_ENV
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -149,9 +147,15 @@ jobs:
           bb: latest
 
       - name: Run Tests
+        if: runner.os == 'Linux'
         uses: coactions/setup-xvfb@6b00cf1889f4e1d5a48635647013c0508128ee1a
         with:
           run: bb run-e2e-tests-vsix ${{ env.VSIX_NAME }}
+
+      - name: Run Tests Windows
+        if: runner.os == 'Windows'
+        shell: bash
+        run: bb run-e2e-tests-vsix $(cygpath -w ${{ env.VSIX_NAME }})
 
   lint:
     runs-on: ubuntu-latest
