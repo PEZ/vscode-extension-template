@@ -27,7 +27,7 @@ jobs:
       - name: Install clojure tools
         uses: DeLaGuardo/setup-clojure@12.5
         with:
-          cli: "1.11.1"
+          cli: latest
           bb: latest
 
       - name: Cache clojure/java dependencies
