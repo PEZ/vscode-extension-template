@@ -146,13 +146,13 @@ jobs:
         with:
           bb: latest
 
-      - name: Run Tests
+      - name: Run E2E Tests Linux
         if: runner.os == 'Linux'
         uses: coactions/setup-xvfb@6b00cf1889f4e1d5a48635647013c0508128ee1a
         with:
           run: bb run-e2e-tests-vsix ${{ env.VSIX_NAME }}
 
-      - name: Run Tests Windows
+      - name: Run E2E Tests Windows
         if: runner.os == 'Windows'
         shell: bash
         run: bb run-e2e-tests-vsix $(cygpath -w ${{ env.VSIX_NAME }})
