@@ -10,7 +10,10 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
 
       - name: Setup Node.js
@@ -76,7 +79,10 @@ jobs:
           path: out/extension-tests.js
 
   test:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     needs: build
     steps:
       - name: Download Test Artifact
@@ -91,7 +97,10 @@ jobs:
         run: node out/extension-tests.js
 
   e2e-test:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     needs: build
     steps:
       - name: Checkout
