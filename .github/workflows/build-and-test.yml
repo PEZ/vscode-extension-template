@@ -12,7 +12,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
 
@@ -88,7 +88,7 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     needs: build
     steps:
@@ -106,7 +106,7 @@ jobs:
   e2e-test:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     needs: build
     steps:
@@ -146,8 +146,8 @@ jobs:
         with:
           bb: latest
 
-      - name: Run E2E Tests Linux
-        if: runner.os == 'Linux'
+      - name: Run E2E Tests Unix
+        if: runner.os != 'Windows'
         uses: coactions/setup-xvfb@6b00cf1889f4e1d5a48635647013c0508128ee1a
         with:
           run: bb run-e2e-tests-vsix ${{ env.VSIX_NAME }}
@@ -155,7 +155,7 @@ jobs:
       - name: Run E2E Tests Windows
         if: runner.os == 'Windows'
         shell: bash
-        run: bb run-e2e-tests-vsix $(cygpath -w ${{ env.VSIX_NAME }})
+        run: bb run-e2e-tests-vsix ${{ env.VSIX_NAME }}
 
   lint:
     runs-on: ubuntu-latest
