@@ -21,6 +21,22 @@
 			]
 		},
 		{
+			"name": "Launch Extension w/ e2e-test-ws folder",
+			"type": "extensionHost",
+			"request": "launch",
+			"runtimeExecutable": "${execPath}",
+			"args": [
+				"--extensionDevelopmentPath=${workspaceRoot}",
+				"--enable-proposed-api",
+				"betterthantomorrow.vsc-et",
+				"${workspaceFolder}/e2e-test-ws/",
+			],
+			"sourceMaps": true,
+			"outFiles": [
+				"${workspaceFolder}/out/**/*.js"
+			]
+		},
+		{
 			"name": "Launch Extension w/o folder",
 			"type": "extensionHost",
 			"request": "launch",
