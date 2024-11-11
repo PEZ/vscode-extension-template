@@ -51,18 +51,18 @@ async function main(vsixPathOrLabel, testWorkspace) {
       launchArgs.push('--install-extension', vsixPathOrLabel);
     }
 
-    cp.spawnSync(cliPath, launchArgs, {
+    const adaptedCliPath = process.platform === 'darwin'
+      ? path.join(path.dirname(cliPath), 'Visual Studio Code - Insiders.app', 'Contents', 'Resources', 'app', 'bin', 'code-insiders')
+      : cliPath;
+
+    const spawnOptions = {
       encoding: 'utf-8',
       stdio: 'inherit',
       shell: true,
-      windowsVerbatimArguments: true,
-      ...(process.platform === 'darwin' ? {
-        env: {
-          ...process.env,
-          PATH: `${path.dirname(cliPath)}:${process.env.PATH}`
-        }
-      } : {})
-    });
+      windowsVerbatimArguments: process.platform === 'win32'
+    };
+
+    cp.spawnSync(adaptedCliPath, launchArgs, spawnOptions);
 
     const runOptions = {
       // When debugging tests, it can be good to use the development version Joyride
