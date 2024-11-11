@@ -1,6 +1,5 @@
 (ns vsc-et.extension
-  (:require ["vscode" :as vscode]
-            [vsc-et.hellos :as hellos]
+  (:require [vsc-et.hellos :as hellos]
             [vsc-et.extension.db :as db]
             [vsc-et.extension.life-cycle-helpers :as lc-helpers]
             [vsc-et.extension.when-contexts :as when-contexts]))
