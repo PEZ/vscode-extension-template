@@ -70,6 +70,7 @@ jobs:
 
       - name: Get VSIX File Name
         id: get-vsix-name
+        shell: bash
         run: echo "VSIX_NAME=$(ls *.vsix)" >> $GITHUB_ENV
 
       - name: Upload VSIX Artifact
@@ -121,6 +122,7 @@ jobs:
 
       - name: Get VSIX File Name
         id: get-vsix-name
+        shell: bash
         run: echo "VSIX_NAME=$(ls /tmp/*.vsix)" >> $GITHUB_ENV
 
       - name: Setup Node.js
