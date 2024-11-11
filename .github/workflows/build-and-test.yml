@@ -123,7 +123,7 @@ jobs:
       - name: Get VSIX File Name
         id: get-vsix-name
         shell: bash
-        run: echo "VSIX_NAME=$(ls /tmp/${{ runner.os }}-*.vsix)" >> $GITHUB_ENV
+        run: echo "VSIX_NAME=/tmp/${{ runner.os }}-*.vsix" >> $GITHUB_ENV
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
