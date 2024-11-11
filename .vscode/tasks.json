@@ -4,11 +4,24 @@
 			{
 					"label": "shadow-cljs watcher",
 					"type": "shell",
-					"command": "/bin/bash -l -c 'npm run watch'",
+					"command": "${command:default}",
+					"args": ["${args:default}"],
 					"problemMatcher": [],
 					"group": {
 							"kind": "build",
 							"isDefault": true
+					},
+					"windows": {
+							"command": "cmd.exe",
+							"args": ["/d", "/c", "npm run watch"]
+					},
+					"linux": {
+							"command": "/bin/bash",
+							"args": ["-l", "-c", "npm run watch"]
+					},
+					"osx": {
+							"command": "/bin/bash",
+							"args": ["-l", "-c", "npm run watch"]
 					}
 			}
 	]
