@@ -11,11 +11,10 @@
           (cli/parse-opts *command-line-args* {:restrict [:dry]}))}
 
   package-pre-release
-  {:doc "Usage: bb package-pre-release <branch> [--dry]"
+  {:doc "Usage: bb package-pre-release [<slug>] [--dry]"
    :task (t/package-pre-release!
-          (cli/parse-opts *command-line-args* {:restrict [:branch :dry]
-                                               :require [:branch]
-                                               :args->opts [:branch]}))}
+          (cli/parse-opts *command-line-args* {:restrict [:slug :dry]
+                                               :args->opts [:slug]}))}
 
   ci:release-notes
   {:doc "Get release notes for <version>"

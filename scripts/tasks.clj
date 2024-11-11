@@ -30,13 +30,15 @@
     (println "Use --force to actually bump the version")))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
-(defn package-pre-release! [{:keys [branch dry]}]
+(defn package-pre-release! [{:keys [slug dry]}]
   (let [current-version (-> (util/sh false "node" "-p" "require('./package').version")
                             :out string/trim)
+        slug (or slug (-> (util/sh false "git" "rev-parse" "--abbrev-ref" "HEAD")
+                          :out string/trim))
         commit-id (-> (util/sh false "git" "rev-parse" "--short" "HEAD")
                       :out string/trim)
         random-slug (util/random-slug 2)
-        slugged-branch (string/replace branch #"/" "-")
+        slugged-branch (string/replace slug #"/" "-")
         version (str current-version "-" slugged-branch "-" commit-id "-" random-slug)]
     (println "Current version:" current-version)
     (println "HEAD Commit ID:" commit-id)
