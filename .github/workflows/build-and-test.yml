@@ -95,7 +95,7 @@ jobs:
       - name: Download Test Artifact
         uses: actions/download-artifact@v4
         with:
-          name: extension-tests
+          name: ${{ runner.os }}-extension-tests
           pattern: out/extension-tests.js
           merge-multiple: true
           path: out/
@@ -117,13 +117,13 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: /tmp
-          pattern: '*.vsix'
+          pattern: '${{ runner.os }}-*.vsix'
           merge-multiple: true
 
       - name: Get VSIX File Name
         id: get-vsix-name
         shell: bash
-        run: echo "VSIX_NAME=$(ls /tmp/*.vsix)" >> $GITHUB_ENV
+        run: echo "VSIX_NAME=$(ls /tmp/${{ runner.os }}-*.vsix)" >> $GITHUB_ENV
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
