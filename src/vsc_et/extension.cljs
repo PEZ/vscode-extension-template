@@ -8,21 +8,17 @@
 ;;;;; Extension activation entry point
 
 (defn ^:export activate [context]
-  (println "Extension Template activate START")
+  (js/console.time "activation")
+  (js/console.timeLog "activation" "Extension Template activate START")
+
   (when context
-    (swap! db/!app-db assoc
-           :extension/context context))
-  (try (let [{:keys [extension/context]} @db/!app-db]
-         (lc-helpers/register-command! db/!app-db context "vsc-et.hello" #'hellos/hello-command!+)
-         (lc-helpers/register-command! db/!app-db context "vsc-et.newHelloDocument" #'hellos/new-hello-doc-command!+)
-         (when-contexts/set-context!+ db/!app-db :vsc-et/active? true))
-       (catch :default e
-         (vscode/window.showErrorMessage (str "Extension Template activation failed: "
-                                              (.-message e)
-                                              ", see Development Console for stack trace"))
-         (throw e))
-       (finally
-         (println "Extension Template activate END")))
+    (swap! db/!app-db assoc :extension/context context))
+  (lc-helpers/register-command! db/!app-db "vsc-et.hello" #'hellos/hello-command!+)
+  (lc-helpers/register-command! db/!app-db "vsc-et.newHelloDocument" #'hellos/new-hello-doc-command!+)
+  (when-contexts/set-context!+ db/!app-db :vsc-et/active? true)
+
+  (js/console.timeLog "activation" "Extension Template activate END")
+  (js/console.timeEnd "activation")
   #js {:v1 {}})
 
 (comment
