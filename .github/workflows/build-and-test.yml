@@ -76,13 +76,13 @@ jobs:
       - name: Upload VSIX Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.VSIX_NAME }}
+          name: ${{ runner.os }}-${{ env.VSIX_NAME }}
           path: ${{ env.VSIX_NAME }}
 
       - name: Upload Test Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: extension-tests
+          name: ${{ runner.os }}-extension-tests
           path: out/extension-tests.js
 
   test:
