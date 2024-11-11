@@ -13,4 +13,3 @@
             _ (vscode/commands.executeCommand "workbench.action.revertAndCloseActiveEditor" false)]
       (is (= (str "Hello, " hello-text "!")
              doc-text)))))
-
