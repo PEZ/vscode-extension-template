@@ -56,6 +56,12 @@ async function main(vsixPathOrLabel, testWorkspace) {
       stdio: 'inherit',
       shell: true,
       windowsVerbatimArguments: true,
+      ...(process.platform === 'darwin' ? {
+        env: {
+          ...process.env,
+          PATH: `${path.dirname(cliPath)}:${process.env.PATH}`
+        }
+      } : {})
     });
 
     const runOptions = {
