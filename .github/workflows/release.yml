@@ -146,5 +146,4 @@ jobs:
       - name: Bump Version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SOURCE_BRANCH: ${{ env.BUMP_BRANCH}}
-        run: bb ci:bump-version-and-push "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com" "${{ github.actor }}" --force
+        run: bb ci:bump-version-and-push ${{ env.BUMP_BRANCH}} "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com" "${{ github.actor }}" --force

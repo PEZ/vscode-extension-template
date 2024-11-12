@@ -14,7 +14,7 @@
     (println changelog-text)))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
-(defn bump-version! [{:keys [user-email user-name dry force]}]
+(defn bump-version! [{:keys [bump-branch user-email user-name dry force]}]
   (if force
     (do
       (println "Bumping version")
@@ -24,9 +24,10 @@
       (util/shell dry "git" "add" ".")
       (let [version (-> (util/sh false "node" "-p" "require('./package').version")
                         :out
-                        string/trim)]
-        (util/shell dry "git" "commit" "-m" (str "Bring on version " version "!")))
-      (util/shell dry "git" "push" "origin" "HEAD"))
+                        string/trim)
+            branch (string/replace bump-branch #"^remotes/origin/" "")]
+        (util/shell dry "git" "commit" "-m" (str "Bring on version " version "!"))
+        (util/shell dry "git" "push" "origin" (str "HEAD:refs/heads/" branch))))
     (println "Use --force to actually bump the version")))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}

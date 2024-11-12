@@ -28,11 +28,11 @@
                                                :args->opts [:version]}))}
 
   ci:bump-version-and-push
-  {:doc "Usage: bb bump-version <email> <user-name> [--dry] [--force]"
+  {:doc "Usage: bb bump-version <bump-branch> <email> <user-name> [--dry] [--force]"
    :task (t/bump-version!
-          (cli/parse-opts *command-line-args* {:restrict [:email :user-name :dry :force]
-                                               :require [:email :user-name]
-                                               :args->opts [:email :user-name]}))}
+          (cli/parse-opts *command-line-args* {:restrict [:bump-branch :email :user-name :dry :force]
+                                               :require [:bump-branch :email :user-name]
+                                               :args->opts [:bump-branch :email :user-name]}))}
 
   run-e2e-tests-ws
   {:doc "Run end-to-end tests using working directory"
