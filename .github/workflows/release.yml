@@ -13,6 +13,8 @@ jobs:
     needs:
       - test
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -21,7 +23,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: /tmp
-          pattern: '*.vsix'
+          pattern: ${{ runner.os }}-'*.vsix'
           merge-multiple: true
 
       - name: Install clojure tools
