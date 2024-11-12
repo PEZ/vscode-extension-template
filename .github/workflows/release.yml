@@ -132,7 +132,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: master
+          ref: ${{ github.ref_name }}
 
       - name: Setup Babashka
         uses: DeLaGuardo/setup-clojure@12.5
