@@ -64,6 +64,7 @@ jobs:
 
       - name: Build Release VSIX
         if: startsWith(github.ref, 'refs/tags/v')
+        shell: bash
         run: |
           set -x
           npm run package
