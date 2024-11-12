@@ -23,7 +23,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: /tmp
-          pattern: ${{ runner.os }}-'*.vsix'
+          pattern: '*.vsix'
           merge-multiple: true
 
       - name: Install clojure tools
