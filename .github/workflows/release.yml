@@ -85,8 +85,8 @@ jobs:
 
       - name: Publish to VS Code Marketplace
         run: | # TODO: Actually publish to the marketplace. For now, only verify that the personal access token will work
-          npx vsce verify-pat --pat ${{ secrets.VSIX_TOKEN }}
-          echo npx vsce publish --packagePath /tmp/*.vsix --pat ${{ secrets.VSIX_TOKEN }} --githubBranch master
+          npx vsce verify-pat --pat ${{ secrets.MARKETPLACE_PAT }}
+          echo npx vsce publish --packagePath /tmp/*.vsix --pat ${{ secrets.MARKETPLACE_PAT }} --githubBranch master
 
   publish-to-open-vsx:
     runs-on: ubuntu-latest
@@ -120,8 +120,8 @@ jobs:
 
       - name: Publish to Open VSX
         run: | # TODO: Actually publish to open-vsx. For now, only verify that the personal access token will work
-          npx ovsx verify-pat --pat ${{ secrets.OPEN_VSX_TOKEN }}
-          echo npx ovsx publish /tmp/*.vsix --pat ${{ secrets.OPEN_VSX_TOKEN }}
+          npx ovsx verify-pat --pat ${{ secrets.OPEN_VSX_PAT }}
+          echo npx ovsx publish /tmp/*.vsix --pat ${{ secrets.OPEN_VSX_PAT }}
 
   bump-version:
     runs-on: ubuntu-latest
