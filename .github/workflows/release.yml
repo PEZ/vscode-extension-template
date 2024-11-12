@@ -132,7 +132,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Get Source Branch
+        id: source-branch
+        run: echo "BUMP_BRANCH=$(git name-rev --name-only --exclude=tags/* HEAD)" >> $GITHUB_ENV
 
       - name: Setup Babashka
         uses: DeLaGuardo/setup-clojure@12.5
@@ -142,4 +146,5 @@ jobs:
       - name: Bump Version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SOURCE_BRANCH: ${{ env.BUMP_BRANCH}}
         run: bb ci:bump-version-and-push "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com" "${{ github.actor }}" --force
