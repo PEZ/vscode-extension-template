@@ -56,7 +56,7 @@ async function main(vsixPathOrLabel, testWorkspace) {
     const result = cp.spawnSync(cliPath, launchArgs, {
       encoding: 'utf-8',
       stdio: 'inherit',
-      // shell: true,
+      shell: process.platform === 'win32',
       windowsVerbatimArguments: true,
     });
     console.log('Spawn result:', result);
