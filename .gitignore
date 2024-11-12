@@ -26,3 +26,7 @@ node_modules
 
 # vscode test-electron
 .vscode-test/
+
+# ignored folder
+
+/ignore/
