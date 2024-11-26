@@ -23,13 +23,13 @@
 (def old-fail (get-method cljs.test/report [:cljs.test/default :fail]))
 
 (defmethod cljs.test/report [:cljs.test/default :fail] [m]
-  (binding [*print-fn* write] (old-fail m))
+  (binding [*print-fn* writeln] (old-fail m))
   (swap! db/!state update :fail inc))
 
 (def old-error (get-method cljs.test/report [:cljs.test/default :error]))
 
 (defmethod cljs.test/report [:cljs.test/default :error] [m]
-  (binding [*print-fn* write] (old-error m))
+  (binding [*print-fn* writeln] (old-error m))
   (swap! db/!state update :error inc))
 
 (def old-end-run-tests (get-method cljs.test/report [:cljs.test/default :end-run-tests]))
