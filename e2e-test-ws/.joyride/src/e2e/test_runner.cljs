@@ -1,6 +1,7 @@
 (ns e2e.test-runner
   (:require [clojure.string :as string]
             [cljs.test]
+            [e2e.baldr]
             [promesa.core :as p]
             [e2e.db :as db]
             ["vscode" :as vscode]
@@ -9,30 +10,25 @@
 (defn- write [& xs]
   (js/process.stdout.write (string/join " " xs)))
 
-(defmethod cljs.test/report [:cljs.test/default :begin-test-var] [m]
-  (write "===" (str (-> m :var meta :name) ": ")))
-
-(defmethod cljs.test/report [:cljs.test/default :end-test-var] [m]
-  (write " ===\n"))
+(defn- writeln [& xs]
+  (apply write xs)
+  (js/process.stdout.write "\n"))
 
 (def old-pass (get-method cljs.test/report [:cljs.test/default :pass]))
 
 (defmethod cljs.test/report [:cljs.test/default :pass] [m]
-  (write "✅")
-  (binding [*print-fn* write] (old-pass m))
+  (binding [*print-fn* writeln] (old-pass m))
   (swap! db/!state update :pass inc))
 
 (def old-fail (get-method cljs.test/report [:cljs.test/default :fail]))
 
 (defmethod cljs.test/report [:cljs.test/default :fail] [m]
-  (write "❌")
   (binding [*print-fn* write] (old-fail m))
   (swap! db/!state update :fail inc))
 
 (def old-error (get-method cljs.test/report [:cljs.test/default :error]))
 
 (defmethod cljs.test/report [:cljs.test/default :error] [m]
-  (write "🚫")
   (binding [*print-fn* write] (old-error m))
   (swap! db/!state update :error inc))
 
