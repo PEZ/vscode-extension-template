@@ -26,18 +26,27 @@ The tools you need to get started are:
 - [Java](https://jdk.java.net/23/)
 - [Clojure CLI](https://clojure.org/guides/install_clojure)
 - [Babashka](https://github.com/babashka/babashka#installation)
+- **If you plan to publish your extension**: At least a skim through Microsofts [Publishing extensions](https://code.visualstudio.com/api/working-with-extensions/publishing-extension) guide and one skim through the corresponding [Publishing Extensions](https://github.com/EclipseFdn/open-vsx.org/wiki/Publishing-Extensions) guide for [open-vsx](https://open-vsx.org/).
 
 Add your curiosity and you should be good to go. To just try the template/workflow out, you do not need to know any ClojureScript (or even programming). When you start to try make the extension do something interesting, you will need to know _some_ Clojure/ClojureScript. Learning Clojure will be a fun endeavor, I promise.
 
 ## How do I get started?
 
 On Github **Use this template**, and name your repository, say you are full of imagination and name it **my-extension**. Clone your repo and open it in VS Code.
+> **You may want to wait with renaming the extension itself** until you've confirmed that you can compile and start it, and connect the REPL for development. When that's confirmed, renaming the extension is mainly a matter of a global search and replace in the project. Something like so:
+> 1. Make a global search (<kbd>cmd/ctrl</kbd>+<kbd>shift</kbd>+<kbd>f</kbd>) for `vsc-et`. Activate case sensitivity and whole-word matching for precision. Study the results, removing the ones you don't think apply (I think it's safe to replace all occurrences). Expand the replace input and study the results list some more before clicking the **Replace All** button.
+> 1. Make a global search replace of “Extension Template”, similarly case sensitive and matching whole words.
+> 1. The publisher of the extension template is `betterthantomorrow`, which you will need to change if you are to publish your extension to the marketplace. See above under prerequisites for the guides to go through to get your publisher id.
 
-Then the paved path is:
+### Starting the extension
+
+... and connecting the ClojureScript REPL.
+
+The paved path is:
 
 1. <kbd>cmd/ctrl</kbd>+<kbd>shift</kbd>+<kbd>b</kbd>. This starts the default build task, which is configured (in [.vscode/tasks.json](.vscode/tasks.json) to start shadow-cljs watcher.
    * Let it compile the extension and run the tests.
-1. <kbd>F5</kbd>. Starts the VS Code Development Extension host (because configured to do so in [.vscode/launch.json](.vscode/launch.json))
+1. <kbd>F5</kbd> starts the VS Code Development Extension host (because configured to do so in [.vscode/launch.json](.vscode/launch.json))
    * This is a VS Code window where your extension under development is installed.
 1. In the extension development host <kbd>cmd/ctrl</kbd>+<kbd>shift</kbd>+<kbd>p</kbd>, find and run the command **Extension template: Say hello!**
    ![VS Code Command Palette, ET hHello command](assets/usage/say-hello.png)
@@ -46,11 +55,15 @@ Then the paved path is:
    1. Select the project root **my-extension**
    1. Select the project type **shadow-cljs**
    1. Select to connect to the build `:extension`
-      * Now you can hack on the extension code and the extension in the development host window will be updated while it is running (interactive programming).
+      * Now you can hack on the extension code and the extension in the development host window will be updated while it is running (a.k.a. interactive programming).
 
 The important thing to note here is the steps where you activate your extension in the development host, starting the ClojureScript repl which Calva can connect to. Depending on the extension you build, it may be that it activates automatically, or by some specific file appearing or whatever. The point is that it needs to be started for Calva to connect to it, and it starting the development host is often not enough to start your extension. (You can actually start the Calva connect before you start the extension host. Calva will connect when the repl is started.)
 
 To be continued...
+
+### Publishing your extension
+
+Possibly carrying out the steps at [create your own organization](https://learn.microsoft.com/azure/devops/organizations/accounts/create-organization)
 
 ## Who built this?
 
