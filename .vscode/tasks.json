@@ -2,7 +2,7 @@
 	"version": "2.0.0",
 	"tasks": [
 			{
-					"label": "shadow-cljs watcher",
+					"label": "Build+watch extension",
 					"type": "shell",
 					"command": "${command:default}",
 					"args": ["${args:default}"],

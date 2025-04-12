@@ -5,5 +5,20 @@
     },
     "search.exclude": {
         "out": true // set this to false to include "out" folder in search results
-    }
+    },
+    "calva.replConnectSequences": [
+        {
+            "name": "vsc-et",
+            "projectType": "deps.edn",
+            "cljsType": "shadow-cljs",
+            "projectRootPath": ["."],
+            "autoSelectForJackIn": true,
+            "autoSelectForConnect": true,
+            "menuSelections": {
+                "cljAliases": [],
+                "cljsDefaultBuild": ":extension",
+                "cljsLaunchBuilds": [":extension", ":test-watch"]
+            }
+        }
+    ]
 }
